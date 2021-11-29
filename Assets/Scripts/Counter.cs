@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Counter : MonoBehaviour
@@ -10,6 +12,7 @@ public class Counter : MonoBehaviour
     [SerializeField] private int count;
     [SerializeField] private PipeGenerator generator;
     [SerializeField] private Text pointsText;
+    [SerializeField] private GameObject textGameOver;
 
     public List<GameObject> pipes { get; private set; }
 
@@ -18,6 +21,14 @@ public class Counter : MonoBehaviour
 	private void Start()
 	{
         pipes = new List<GameObject>();
+	}
+
+	private void Update()
+	{
+		if (Input.GetKeyDown(KeyCode.Escape))
+		{
+            SceneManager.LoadScene("MainMenu");
+		}
 	}
 
 	private void FixedUpdate()
@@ -44,5 +55,6 @@ public class Counter : MonoBehaviour
 		{
             pipe.Moving = false;
 		}
+        textGameOver.SetActive(true);
 	}
 }
