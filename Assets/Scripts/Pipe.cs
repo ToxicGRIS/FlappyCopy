@@ -23,9 +23,9 @@ public class Pipe : MonoBehaviour
             transform.position = new Vector3(transform.position.x - Speed * Time.deltaTime, transform.position.y, transform.position.z);
     }
 
-    public void SetPos(double y, float height)
+    public void SetPos(float y, float height)
 	{
-        Up.transform.localPosition = new Vector3(Up.transform.localPosition.x, height  + 5, Up.transform.localPosition.z);
-        Down.transform.localPosition = new Vector3(Down.transform.localPosition.x, -height / 2 - 5, Down.transform.localPosition.z);
+        Up.transform.localPosition = new Vector3(Up.transform.localPosition.x, y + height, Up.transform.localPosition.z);
+        Down.transform.localPosition = new Vector3(Down.transform.localPosition.x, y - height / 2, Down.transform.localPosition.z);
 	}
 }

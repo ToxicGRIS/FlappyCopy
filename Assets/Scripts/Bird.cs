@@ -1,15 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Bird : MonoBehaviour
 {
     #region Properties
 
-    [SerializeField] bool alive;
-    [SerializeField] Counter counter;
+    [SerializeField] private bool alive;
+    [SerializeField] private Counter counter;
+    [SerializeField] private AudioSource swoosh;
 
-    Rigidbody2D rb;
+    private Rigidbody2D rb;
     
     public bool Alive { get => alive; set { alive = value; } }
 
@@ -25,11 +24,19 @@ public class Bird : MonoBehaviour
 		{
             rb.velocity = Vector2.zero;
             rb.AddForce(Vector2.up * 10 * rb.mass, ForceMode2D.Impulse);
+            swoosh.pitch = Random.Range(0.9f, 1.1f);
+            swoosh.Play();
 		}
+        if (Alive)
+            transform.rotation = Quaternion.Euler(0, 0, Mathf.Rad2Deg * Mathf.Atan(rb.velocity.y / 5));
     }
 
 	private void OnCollisionEnter2D(Collision2D collision)
 	{
-        counter.GameOver();
+        if (Alive)
+        {
+            rb.velocity = new Vector2(3, rb.velocity.y);
+            counter.GameOver();
+        }
 	}
 }

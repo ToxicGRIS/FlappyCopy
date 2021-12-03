@@ -13,8 +13,12 @@ public class Counter : MonoBehaviour
     [SerializeField] private PipeGenerator generator;
     [SerializeField] private Text pointsText;
     [SerializeField] private GameObject textGameOver;
+    [SerializeField] private AudioSource point;
+    [SerializeField] private AudioSource gameOver;
 
     public List<GameObject> pipes { get; private set; }
+
+    public bool Paused { get; private set; }
 
 	#endregion
 
@@ -33,7 +37,7 @@ public class Counter : MonoBehaviour
 
 	private void FixedUpdate()
     {
-        if (pipes.Count > 0)
+        if (pipes.Count > 0 && pipes[0] != null)
             if (pipes[0].transform.position.x < bird.transform.position.x)
             {
                 AddPoint();
@@ -45,10 +49,13 @@ public class Counter : MonoBehaviour
 	{
         count++;
         pointsText.text = $"Count: {count}";
+        point.pitch = Random.Range(0.9f, 1.1f);
+        point.Play();
 	}
 
     public void GameOver()
 	{
+        gameOver.Play();
         generator.Active = false;
         bird.GetComponent<Bird>().Alive = false;
         foreach (var pipe in FindObjectsOfType<Pipe>())
@@ -56,5 +63,6 @@ public class Counter : MonoBehaviour
             pipe.Moving = false;
 		}
         textGameOver.SetActive(true);
+        if (PlayerPrefs.GetInt("Record") < count) PlayerPrefs.SetInt("Record", count);
 	}
 }
