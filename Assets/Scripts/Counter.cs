@@ -29,7 +29,9 @@ public class Counter : MonoBehaviour
 
 	private void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.Escape))
+		if (Input.GetKeyDown(KeyCode.Escape) || 
+            (!bird.GetComponent<Bird>().Alive && 
+            (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0))))
 		{
             SceneManager.LoadScene("MainMenu");
 		}

@@ -23,6 +23,12 @@ public class Menu : MonoBehaviour
 		record.text = $"RECORD: {PlayerPrefs.GetInt("Record")}";
 	}
 
+	private void Update()
+	{
+		if (Input.GetKeyDown(KeyCode.Space))
+			StartGame();
+	}
+
 	public void StartGame()
 	{
 		SceneManager.LoadScene("Gameplay");

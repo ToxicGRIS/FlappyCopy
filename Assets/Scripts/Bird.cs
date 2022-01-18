@@ -20,7 +20,7 @@ public class Bird : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && Alive)
+        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0)) && Alive)
 		{
             rb.velocity = Vector2.zero;
             rb.AddForce(Vector2.up * 10 * rb.mass, ForceMode2D.Impulse);

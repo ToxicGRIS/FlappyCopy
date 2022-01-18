@@ -227,8 +227,8 @@ MonoBehaviour:
   PipePrefab: {fileID: 267669033838890291, guid: fd352333a892a1f478134853a001c6df, type: 3}
   minY: -3
   maxY: 3
-  minHeight: 2.75
-  maxHeight: 3
+  minHeight: 2.5
+  maxHeight: 2.75
   active: 1
   bird: {fileID: 1926541}
   counter: {fileID: 874665913}
